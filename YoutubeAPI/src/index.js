@@ -17,7 +17,7 @@ class App extends React.Component {
             selectedVideo: null
         }
 
-        this.onSearchBarChange('Australia');
+        this.onSearchBarChange('Xactly');
     }
     onSearchBarChange(term){
         YTSearch({

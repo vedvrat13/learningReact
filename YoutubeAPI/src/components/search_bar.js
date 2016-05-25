@@ -12,8 +12,14 @@ class SearchBar extends React.Component {
 
     render() {
         return (
-            <div className="searchBar">
-                <input value={this.state.term} onChange={(event) => this.handleInputChange(event.target.value)} />
+            <div className="searchBar form-group">
+                <input
+                    value={this.state.term}
+                    className="form-control"
+                    id="searchTermEntry"
+                    placeholder="Enter the Search Term"
+                    onChange={(event) => this.handleInputChange(event.target.value)}
+                />
             </div>
         );
     }

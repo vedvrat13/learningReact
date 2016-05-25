@@ -15,7 +15,7 @@ class VideoList extends React.Component {
                 />
         }.bind(this));
         return (
-            <ul className="video-list col-md-8">
+            <ul className="video-list col-md-4">
                 {ListItem}
             </ul>
         );

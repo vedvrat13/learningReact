@@ -1,44 +1,55 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {fetchPosts} from '../actions/index.js'
+import {fetchPosts} from '../actions/index';
+import {Link} from 'react-router';
 
 class PostsList extends React.Component {
-    constructor(){
+    constructor() {
         super();
-
         this.renderPostsList = this.renderPostsList.bind(this);
     }
-    renderPostsList(){
-        if(!this.props.posts){
+    componentWillMount() {
+        this.props.fetchPosts();
+    }
+    renderPostsList() {
+        if (!this.props.posts) {
             return <div>Loading..</div>
         }
-        this.props.fetchPosts();
-        console.log('Entered 2');
-        console.log(this.props.posts);
-        return this.props.posts.map(function(post){
-            return <li key={post.id}>{post.title}</li>;
+        return this.props.posts.map(function(post) {
+            return (
+                <li className="list-group-item" key={post.id}>
+                    <Link to={"posts/" + post.id}>
+                        <span className="pull-xs-right">{post.categories}</span>
+                        <strong>{post.title}</strong>
+                    </Link>
+                </li>
+            );
         });
     }
-    render(){
-        return(
-            <ul>
-            {this.renderPostsList()}
-            </ul>
+    render() {
+        return (
+            <div>
+                <div className="text-xs-right">
+                    <Link to="/posts/new" className="btn btn-primary">Add a Post</Link>
+                </div>
+                <ul className="list-group">
+                    {this.renderPostsList()}
+                </ul>
+            </div>
 
         );
     }
 }
 
-function mapStateToProps(state){
-    return {
-        posts: state.posts
-    };
+function mapStateToProps(state) {
+    return {posts: state.posts.all};
 }
 
-function mapActionsToProps(dispatch){
-
-    return bindActionCreators({fetchPosts:fetchPosts},dispatch)
+function mapActionsToProps(dispatch) {
+    return bindActionCreators({
+        fetchPosts: fetchPosts
+    }, dispatch)
 }
 
-export default connect(mapStateToProps,mapActionsToProps)(PostsList);
+export default connect(mapStateToProps, mapActionsToProps)(PostsList);

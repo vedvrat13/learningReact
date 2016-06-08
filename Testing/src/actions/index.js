@@ -1,10 +1,9 @@
 import React from 'react';
+import {COMMENT_LIST} from './constants';
 
-export const COMMENT_LIST = 'COMMENT_LIST';
-
-export function addComment(data){
+export function addComment(data) {
     return {
-        type:COMMENT_LIST,
-        payload:data
+        type: COMMENT_LIST,
+        payload: data
     }
 }

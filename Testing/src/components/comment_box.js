@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {addComment} from '../actions/index';
+import {COMMENT_LIST} from '../actions/constants';
 
 class CommentBox extends Component {
     constructor() {
@@ -15,8 +16,8 @@ class CommentBox extends Component {
     }
     handleSubmit(event) {
         event.preventDefault();
+        this.props.addComment(this.state.comment);
         this.setState({comment: ''});
-        //this.addComment(this.state.comment);
     }
     render() {
         return (
